@@ -1,5 +1,5 @@
 import React from 'react';
-import TopicPills from './TopicPills';
+import TopicPills from '../Compnents/TopicPills';
 export default class LessonTabs
     extends React.Component {
     render() { return(
