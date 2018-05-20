@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Message from '../Compnents/Message';
+import Message from '../Components/Message';
 import {BrowserRouter as Router, Link, Route}
     from 'react-router-dom'
 

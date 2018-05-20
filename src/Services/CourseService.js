@@ -1,6 +1,6 @@
 let _singleton = Symbol();
 const COURSE_API_URL =
-    'https://webdev-zhao-huang-summer2018.herokuapp.com/api/course';
+    'http://localhost:8080/api/course';
 
 class CourseService {
     constructor(singletonToken) {
@@ -27,7 +27,18 @@ class CourseService {
             method: 'POST'
         }).then(function (response) {
             return response.json();
-        })}
+        })
+    }
+
+    deleteCourse(id){
+        return fetch(COURSE_API_URL + "/" + id, {
+            method: 'DELETE'
+        }).then(function (response) {
+            return response.json();
+        })
+    }
+
+
 
 }
 export default CourseService;

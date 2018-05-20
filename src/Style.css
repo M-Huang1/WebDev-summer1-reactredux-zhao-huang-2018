@@ -1,3 +1,10 @@
 .row{
     margin: 10px 0px;
 }
+.card{
+    margin: 10px 10px;
+    width: 20rem;
+}
+.btn{
+    margin:10px 0px;
+}
