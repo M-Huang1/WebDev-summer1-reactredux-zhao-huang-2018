@@ -12,7 +12,9 @@ export default class CourseList
         this.courseService = CourseService.instance;
         this.titleChanged = this.titleChanged.bind(this);
         this.createCourse = this.createCourse.bind(this);
+        this.deleteCourse = this.deleteCourse.bind(this);
         this.state = {courses: [], course:{title:""}};
+
     }
     componentDidMount() {
         this.findAllCourses();
@@ -21,7 +23,6 @@ export default class CourseList
         this.courseService
             .findAllCourses()
             .then((courses) => {
-                console.log(courses);
                 this.setState({courses: courses});
             })
     }
@@ -33,12 +34,14 @@ export default class CourseList
     }
 
     renderCourseRows() {
+        var self = this;
         let courses = null;
         if(this.state) {
             courses = this.state.courses.map(
                 function (course) {
                     return <CourseCard key={course.id}
-                                      course={course}/>
+                                      course={course}
+                                      delete={self.deleteCourse}  />
                 }
             )
         }
@@ -49,10 +52,22 @@ export default class CourseList
     createCourse() {
         this.courseService
             .createCourse(this.state.course)
-            .then(() => { this.findAllCourses();
-            this.renderCourseRows()});
+            .then(() => {
+                this.findAllCourses();
+            }
+            )
+
     }
 
+    deleteCourse(id) {
+        this.courseService
+            .deleteCourse(id)
+            .then(() => {
+                    this.findAllCourses();
+                }
+            )
+
+    }
 
     render() {
         return (

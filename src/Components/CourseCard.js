@@ -1,19 +1,23 @@
 import React, {Component} from 'react';
+import CourseService from "../Services/CourseService";
 export default class CourseCard extends React.Component
+
 {
     constructor(props) {
         super(props);
-        props.course.created = new Date(props.course.created).toLocaleString();
-        props.course.modified = new Date(props.course.modified).toLocaleString();
+        this.courseService = CourseService.instance;
+
     }
+
 
     render() { return (
         <div className="card">
             <div className="card-body">
                 <h5 className="card-title">{this.props.course.title}</h5>
-                <p className="card-created">Created: {this.props.course.created}</p>
-                <p className="card-modified">Last Modified: {this.props.course.modified}</p>
+                <p className="card-created">Created: {new Date(this.props.course.created).toLocaleString()}</p>
+                <p className="card-modified">Last Modified: {new Date(this.props.course.modified).toLocaleString()}</p>
                 <a href="#" className="btn btn-primary">View Course</a>
+                <button className="btn btn-danger" onClick={()=>{this.props.delete(this.props.course.id)}}>Delete Course</button>
             </div></div>
     )
     }
