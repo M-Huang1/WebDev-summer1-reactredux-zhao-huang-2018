@@ -30,6 +30,12 @@ class CourseService {
         })
     }
 
+    findCourseById(id){
+        return fetch(COURSE_API_URL + "/" + id)
+            .then(function (response) {
+            return response.json();
+        })
+    }
     deleteCourse(id){
         return fetch(COURSE_API_URL + "/" + id, {
             method: 'DELETE'

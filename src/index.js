@@ -9,26 +9,33 @@ import {BrowserRouter as Router, Link,Switch, Route}
 import IndexRoute from 'react-router-dom';
 import CourseEditor from "./Containers/CourseEditor";
 
+const Home = () => {
+    return(
+        <div>
+            <h1> Welcome to My Course Manager </h1>
+            <Link to='/CourseManager'> Click Here To View All Courses </Link>
+        </div>
+        );
+};
+
 
 const App = () => {
     return(
         <Router>
         <div>
-
+            <Route exact path='/'
+                   component={Home}/>
             <Route exact path='/CourseManager'
                    component={CourseManager}/>
-            <Route exact path='/CourseEditor'
+            <Route exact path='/CourseEditor/:id'
                    component={CourseEditor}/>
         </div>
         </Router>);
 };
 
-export default App
 
 ReactDOM.render(
-    <div>
-        <App/>
-    </div>,
+    <App/>,
     document.getElementById('root')
 );
 

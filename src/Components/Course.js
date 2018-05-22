@@ -22,7 +22,7 @@ export default class CourseCard extends React.Component
                 <h5 className="card-title">{this.props.course.title}</h5>
                 <p className="card-created">Created: {new Date(this.props.course.created).toLocaleString()}</p>
                 <p className="card-modified">Last Modified: {new Date(this.props.course.modified).toLocaleString()}</p>
-                <Link to="/CourseEditor" className="btn btn-primary">View Course</Link>
+                <Link to={"/CourseEditor/" +this.props.course.id} className="btn btn-primary">View Course</Link>
                 <button className="btn btn-danger" onClick={()=>{this.props.delete(this.props.course.id)}}>Delete Course</button>
 
             </div></div>

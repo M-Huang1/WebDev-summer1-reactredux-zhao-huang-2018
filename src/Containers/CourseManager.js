@@ -2,8 +2,6 @@ import React from 'react';
 import CourseCard from "../Components/Course";
 import "../Style.css"
 import CourseService from "../Services/CourseService";
-import {BrowserRouter as Router, Link, Route}
-    from 'react-router-dom';
 import CourseEditor from "./CourseEditor";
 import ModuleList from "./ModuleList";
 
@@ -39,7 +37,7 @@ export default class CourseManager
     }
 
     renderCourseRows() {
-        var self = this;
+        let self = this;
         let courses = null;
         if(this.state) {
             courses = this.state.courses.map(
@@ -81,7 +79,7 @@ export default class CourseManager
     render() {
         return (
             <div className="container-fluid">
-                <h1>Course List</h1>
+                <h1 className="header">Course List</h1>
                 <input onChange={this.titleChanged}
                        className="form-control" id="titleFld"
                        placeholder="Course Title"/>

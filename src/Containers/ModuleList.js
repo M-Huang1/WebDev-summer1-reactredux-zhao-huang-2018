@@ -1,36 +1,88 @@
 import React from 'react';
 import ModuleListItem from '../Components/Module.js';
+import ModuleService from "../Services/ModuleService";
+import CourseService from "../Services/CourseService";
 export default class ModuleList
     extends React.Component {
-    constructor() { super();
+    constructor(props) {
+        super(props);
+        this.date = new Date();
+        this.courseService = CourseService.instance;
+        this.moduleService = ModuleService.instance;
         this.createModule = this.createModule.bind(this);
         this.titleChanged = this.titleChanged.bind(this);
+        this.findAllModulesByCourse = this.findAllModulesByCourse.bind(this);
+        this.findCourse = this.findCourse.bind(this);
+        this.deleteModule = this.deleteModule.bind(this);
         this.state = {
+            course: null,
             module: { title: '' },
-            modules: [
-                {title: 'Module 1 - jQuery', id: 123},
-                {title: 'Module 2 - React', id: 234},
-                {title: 'Module 3 - Redux', id: 345},
-                {title: 'Module 4 - Angular', id: 456},
-                {title: 'Module 5 - Node.js', id: 567},
-                {title: 'Module 6 - MongoDB', id: 678},]};}
+            modules: []};}
 
 
+    componentDidMount() {
+        this.findCourse();
+        this.findAllModulesByCourse();
+    }
+
+    //Saves the course given by the course id to the state
+    findCourse(){
+        this.courseService
+            .findCourseById(this.props.courseId)
+            .then((course) => {
+                this.setState({course: course});
+            })
+    }
+
+    //Updates the title of the module to be created
     titleChanged(event) {
         this.setState({module: {title: event.target.value}});
     }
 
+    findAllModulesByCourse() {
+        this.moduleService
+            .findAllModulesForCourse(this.props.courseId)
+            .then((modules) => {
+
+                this.setState({modules: modules});
+            })
+    }
+
+    deleteModule(id) {
+        console.log("Deleting" + id);
+        this.moduleService
+            .deleteModule(id)
+            .then(() => {
+                    this.findAllModulesByCourse();
+                }
+            )
+
+    }
+
     renderListOfModules() {
-        let modules = this.state.modules
-            .map(function(module){
-                return <ModuleListItem
-                    title={module.title} key={module.id}/>
-            });
-        return modules;}
+        let self = this;
+        let modules = null;
+        if(this.state) {
+            modules = this.state.modules.map(
+                function(module){
+                    return <ModuleListItem
+                        title={module.title}
+                        delete={self.deleteModule}
+                        id={module.id}
+                        key={module.id}/>
+                }
+                );
+        }
+        return (modules)
+    }
 
-
-    createModule(event) {
-        console.log(this.state.module);
+    createModule() {
+        this.moduleService
+            .createModule(this.state.module, this.props.courseId)
+            .then(() => {
+                    this.findAllModulesByCourse();
+                }
+            )
     }
 
     render() {
