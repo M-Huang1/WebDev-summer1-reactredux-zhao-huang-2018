@@ -59,7 +59,7 @@ const App = () => {
                 <Link to="/pageParam/234">Page 234</Link>|
                 <Link to="/pageUpdate/345">
                     PageUpdate 345</Link>|
-                <Link to="/pageUpdate/456">
+                <Link to="/pageUpdate/456" className="btn">
                     PageUpdate 456</Link>
                 <Route path='/pageUpdate/:id'
                        component={PageUpdate}/>
