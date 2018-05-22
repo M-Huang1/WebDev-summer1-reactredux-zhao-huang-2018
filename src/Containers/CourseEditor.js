@@ -1,6 +1,6 @@
 import React from 'react';
 import ModuleList from './ModuleList.js';
-import LessonTabs from './LessonTabs';
+import LessonTabs from './LessonList';
 import CourseService from "../Services/CourseService";
 import ModuleService from "../Services/ModuleService";
 import {BrowserRouter as Router, Link, Route}

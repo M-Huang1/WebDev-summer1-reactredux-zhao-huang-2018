@@ -4,7 +4,7 @@ import {BrowserRouter as Router, Link, Route}
     from 'react-router-dom';
 
 import CourseEditor from "../Containers/CourseEditor";
-export default class CourseCard extends React.Component
+export default class Course extends React.Component
 
 
 {

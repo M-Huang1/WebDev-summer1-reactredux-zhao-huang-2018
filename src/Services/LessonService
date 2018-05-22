@@ -1,10 +1,10 @@
 let _singleton = Symbol();
 
 const ADDRESS = 'http://localhost:8080';
-const MODULE_API_URL =
-    'http://localhost:8080/api/module';
+const LESSON_API_URL =
+    'http://localhost:8080/api/lesson';
 
-class ModuleService {
+class LessonService {
     constructor(singletonToken) {
         if (_singleton !== singletonToken)
             throw new Error('Cannot instantiate directly.');
@@ -14,18 +14,18 @@ class ModuleService {
             this[_singleton] = new ModuleService(_singleton);
         return this[_singleton]
     }
-    //Finds all modules
-    findAllModules() {
-        return fetch(MODULE_API_URL)
+    //Finds all Lessons
+    findAllLessons() {
+        return fetch(LESSON_API_URL)
             .then(function(response){
                 return response.json();
             });
     }
 
-    //Creates a module
-    createModule(module, id) {
-        return fetch(ADDRESS+'/api/course/' + id +'/module', {
-            body: JSON.stringify(module),
+    //Creates a Lesson
+    createLesson(lesson, courseId, moduleId) {
+        return fetch(ADDRESS+'/api/course/' + courseId +'/module/' + moduleId + '/lesson', {
+            body: JSON.stringify(lesson),
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -35,29 +35,28 @@ class ModuleService {
         })
     }
 
-    findModuleById(id){
-        return fetch(MODULE_API_URL + "/" + id)
-            .then(function (response) {
-                return response.json();
-            })
-    }
-    //Finds all modules for a certain course id
-    findAllModulesForCourse(id) {
-        return fetch(ADDRESS+'/api/course/' + id +'/module')
+    //Finds all lessons for a module
+    findAllLessonForModule(courseId, moduleId) {
+        return fetch(ADDRESS+'/api/course/' + courseId +'/module/' + moduleId + '/lesson')
             .then(function(response){
                 return response.json();
             });
     }
     //Deletes a module
-    deleteModule(id){
-        return fetch(MODULE_API_URL + "/" + id, {
+    deleteLesson(id){
+        return fetch(LESSON_API_URL + "/" + id, {
             method: 'DELETE'
         }).then(function (response) {
             return response.json();
         })
     }
 
-
+    findLessonById(id){
+        return fetch(LESSON_API_URL + "/" + id)
+            .then(function (response) {
+                return response.json();
+            })
+    }
 
 }
-export default ModuleService;
+export default LessonService;

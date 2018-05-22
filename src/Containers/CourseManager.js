@@ -1,5 +1,5 @@
 import React from 'react';
-import CourseCard from "../Components/Course";
+import Course from "../Components/Course";
 import "../Style.css"
 import CourseService from "../Services/CourseService";
 import CourseEditor from "./CourseEditor";
@@ -42,7 +42,7 @@ export default class CourseManager
         if(this.state) {
             courses = this.state.courses.map(
                 function (course) {
-                    return <CourseCard key={course.id}
+                    return <Course key={course.id}
                                       course={course}
                                       delete={self.deleteCourse}
                                         module={self.routeToModule}/>
