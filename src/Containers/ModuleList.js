@@ -1,5 +1,5 @@
 import React from 'react';
-import ModuleListItem from '../Components/Module.js';
+import Module from '../Components/Module.js';
 import ModuleService from "../Services/ModuleService";
 import CourseService from "../Services/CourseService";
 export default class ModuleList
@@ -15,12 +15,14 @@ export default class ModuleList
         this.findCourse = this.findCourse.bind(this);
         this.deleteModule = this.deleteModule.bind(this);
         this.state = {
+            courseId: this.props.courseId,
             course: null,
             module: { title: '' },
             modules: []};}
 
 
     componentDidMount() {
+        this.setState({courseId:this.props.courseId});
         this.findCourse();
         this.findAllModulesByCourse();
     }
@@ -28,7 +30,7 @@ export default class ModuleList
     //Saves the course given by the course id to the state
     findCourse(){
         this.courseService
-            .findCourseById(this.props.courseId)
+            .findCourseById(this.state.courseId)
             .then((course) => {
                 this.setState({course: course});
             })
@@ -41,15 +43,15 @@ export default class ModuleList
 
     findAllModulesByCourse() {
         this.moduleService
-            .findAllModulesForCourse(this.props.courseId)
+            .findAllModulesForCourse(this.state.courseId)
             .then((modules) => {
 
                 this.setState({modules: modules});
             })
+
     }
 
     deleteModule(id) {
-        console.log("Deleting" + id);
         this.moduleService
             .deleteModule(id)
             .then(() => {
@@ -63,22 +65,24 @@ export default class ModuleList
         let self = this;
         let modules = null;
         if(this.state) {
-            modules = this.state.modules.map(
-                function(module){
-                    return <ModuleListItem
-                        title={module.title}
-                        delete={self.deleteModule}
-                        id={module.id}
-                        key={module.id}/>
-                }
-                );
+            if(this.state.modules.length > 0) {
+                modules = this.state.modules.map(
+                    function (module) {
+                        return <Module
+                            title={module.title}
+                            delete={self.deleteModule}
+                            id={module.id}
+                            key={module.id}
+                            courseId = {self.state.courseId}/>
+                    });
+            }
         }
         return (modules)
     }
 
     createModule() {
         this.moduleService
-            .createModule(this.state.module, this.props.courseId)
+            .createModule(this.state.module, this.state.courseId)
             .then(() => {
                     this.findAllModulesByCourse();
                 }
@@ -92,9 +96,8 @@ export default class ModuleList
                    onChange={this.titleChanged}
                    value={this.state.module.title}
                    placeholder="title" />
-                <button onClick={this.createModule} className="btn btn-primary btn-block">
-                    <i className=
-                           "fa fa-plus"></i>
+                <button onClick={this.createModule} className="btn btn-primary ">
+                    Add Module
                 </button>
             <ul className="list-group">
                 {this.renderListOfModules()}

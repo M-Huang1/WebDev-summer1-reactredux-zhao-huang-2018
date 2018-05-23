@@ -8,8 +8,25 @@
 .btn{
     margin:10px 5px;
 }
-
+nav{
+    color: blue;
+}
+nav:hover{
+    color: black;
+}
 
 * {
     font-family: 'Quicksand', sans-serif;
+}
+.moduleList{
+    border-right: 2px solid black;
+    border-top: 2px solid black;
+    height: 100vh;
+}
+.selected{
+    border: 1px solid red;
+}
+html, body{
+    height: 100%;
+    overflow: auto;
 }

@@ -2,7 +2,6 @@ import React from 'react';
 import Course from "../Components/Course";
 import "../Style.css"
 import CourseService from "../Services/CourseService";
-import CourseEditor from "./CourseEditor";
 import ModuleList from "./ModuleList";
 
 export default class CourseManager

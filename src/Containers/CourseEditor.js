@@ -1,10 +1,11 @@
 import React from 'react';
 import ModuleList from './ModuleList.js';
-import LessonTabs from './LessonList';
+import LessonList from './LessonList';
 import CourseService from "../Services/CourseService";
 import ModuleService from "../Services/ModuleService";
 import {BrowserRouter as Router, Link, Route}
     from 'react-router-dom';
+import CourseManager from "./CourseManager";
 export default class CourseEditor extends React.Component {
 
     constructor(props){
@@ -13,7 +14,7 @@ export default class CourseEditor extends React.Component {
         this.moduleService = ModuleService.instance;
         this.findCourse = this.findCourse.bind(this);
         this.updatePage = this.updatePage.bind(this);
-        this.state = {id:this.props.match.params.id, course:{'title':'Course Name'}};
+        this.state = {id:this.props.match.params.courseId, course:{'title':'Course Name'}};
         this.courseService
             .findCourseById(this.state.id)
             .then((course) => {
@@ -42,24 +43,31 @@ export default class CourseEditor extends React.Component {
     }
 
 
+
     render() {
         return (
-
-            <div className="container-fluid">
+            <Router>
+            <div className="container-fluid" style={{backgroundColor:'#DDDDDD', height:'100vh'}}>
                 <h1>{this.state.course.title}</h1>
-                <h5> <Link to='/CourseManager'> Back to Course Page </Link></h5>
-                <div className="row">
-                    <div className="col-3">
-                        <h2>Modules</h2><ModuleList courseId={this.state.id}/>
+                <h5> <a href="/CourseManager"> Back to Course Page </a></h5>
+                <div className="row moduleRow">
+
+                    <div className="col-3 moduleList">
+                        <h2>Modules</h2><ModuleList  courseId={this.state.id}/>
                     </div>
-                    <Router>
                     <div className="col-9">
-                        <h2>Lessons</h2>
-                        <Route path={this.props.location.pathname + '/module/:id'} component={LessonTabs}/>
+
+                        <Route exact path='/CourseEditor/:courseId/module/:moduleId'
+                               component={LessonList}/>
+
                     </div>
-                    </Router>
+
+
                 </div>
+
             </div>
+            </Router>
+
         )
     }
 }
