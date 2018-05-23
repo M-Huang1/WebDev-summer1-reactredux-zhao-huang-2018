@@ -17,6 +17,7 @@ export default class LessonList
         this.titleChanged = this.titleChanged.bind(this);
         this.findAllLessonsByModule = this.findAllLessonsByModule.bind(this);
         this.createLesson = this.createLesson.bind(this);
+        this.activeTab = this.activeTab.bind(this);
         this.state = {
             courseId: this.props.match.params.courseId,
             moduleId: this.props.match.params.moduleId,
@@ -95,6 +96,9 @@ export default class LessonList
 
     }
 
+    activeTab(id){
+        this.setState({activeTab:id});
+    }
     renderListOfLessons() {
         let self = this;
         let lessons = null;
@@ -113,6 +117,7 @@ export default class LessonList
                             delete={self.deleteLesson}
                             id={lesson.id}
                             key={lesson.id}
+                            makeActiveTab = {self.activeTab}
                             activeTab={self.state.activeTab}
                         />
                     });

@@ -7,9 +7,6 @@ export default class Lesson extends React.Component
 {
     constructor(props) {
         super(props);
-        this.state = {
-            activeTab:null
-        }
 
     }
     active(){

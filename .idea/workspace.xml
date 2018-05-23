@@ -2,18 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d342d236-57ca-484d-8e54-fed244ab6889" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/Services/LessonService.js" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/Components/LessonTab.js" afterPath="$PROJECT_DIR$/src/Components/Lesson.js" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Message.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Module.js" afterPath="$PROJECT_DIR$/src/Components/Module.js" />
-      <change beforePath="$PROJECT_DIR$/src/Containers/CourseEditor.js" afterPath="$PROJECT_DIR$/src/Containers/CourseEditor.js" />
-      <change beforePath="$PROJECT_DIR$/src/Containers/CourseManager.js" afterPath="$PROJECT_DIR$/src/Containers/CourseManager.js" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Lesson.js" afterPath="$PROJECT_DIR$/src/Components/Lesson.js" />
       <change beforePath="$PROJECT_DIR$/src/Containers/LessonList.js" afterPath="$PROJECT_DIR$/src/Containers/LessonList.js" />
-      <change beforePath="$PROJECT_DIR$/src/Containers/ModuleList.js" afterPath="$PROJECT_DIR$/src/Containers/ModuleList.js" />
-      <change beforePath="$PROJECT_DIR$/src/Services/LessonService" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Style.css" afterPath="$PROJECT_DIR$/src/Style.css" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" afterPath="$PROJECT_DIR$/src/index.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -83,11 +73,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LessonList.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="LessonList.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Containers/LessonList.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="589">
-              <caret line="121" column="5" lean-forward="true" selection-start-line="121" selection-start-column="5" selection-end-line="121" selection-end-column="5" />
+            <state relative-caret-position="250">
+              <caret line="10" column="21" lean-forward="true" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -119,11 +109,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Lesson.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Lesson.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Components/Lesson.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="27" column="43" lean-forward="true" selection-start-line="27" selection-start-column="43" selection-end-line="27" selection-end-column="98" />
+            <state relative-caret-position="339">
+              <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -333,12 +323,12 @@
       <workItem from="1526680297330" duration="232000" />
       <workItem from="1526750524655" duration="19594000" />
       <workItem from="1526922986257" duration="22769000" />
-      <workItem from="1527007878226" duration="27826000" />
+      <workItem from="1527007878226" duration="28114000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="81122000" />
+    <option name="totallyTimeSpent" value="81410000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-2891" y="-11" width="1942" height="1042" extended-state="6" />
@@ -747,16 +737,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Containers/LessonList.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="589">
-          <caret line="121" column="5" lean-forward="true" selection-start-line="121" selection-start-column="5" selection-end-line="121" selection-end-column="5" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/Module.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -769,10 +749,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/Lesson.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="27" column="43" lean-forward="true" selection-start-line="27" selection-start-column="43" selection-end-line="27" selection-end-column="98" />
+        <state relative-caret-position="339">
+          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Containers/LessonList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="10" column="21" lean-forward="true" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
