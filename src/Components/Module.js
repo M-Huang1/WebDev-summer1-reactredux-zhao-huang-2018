@@ -8,16 +8,26 @@ export default class Module
 
         super(props);
     }
+
+    active(){
+
+        if (this.props.activeModule == this.props.id && this.props.activeModule != null){
+            return "list-group-item active";
+        }
+        else{
+            return "list-group-item";
+        }
+    }
     render() {
         return (
 
             <div>
-            <li className="list-group-item">
+            <li className={this.active()}>
                 {this.props.title}
                 <span className="float-right">
-                    <NavLink activeClassName="selected" to={'/CourseEditor/' + this.props.courseId + '/module/' + this.props.id} >
-                        <i className="fa fa-pencil"/>
-                    </NavLink>
+                    <Link to={'/CourseEditor/' + this.props.courseId + '/module/' + this.props.id} >
+                        <i onClick={()=>{this.props.makeActiveModule(this.props.id)}} className="fa fa-pencil"/>
+                    </Link>
                     <span>&nbsp;&nbsp;</span>
                     <Link to={'/CourseEditor/' + this.props.courseId}>
                     <i className="fa fa-trash" onClick={()=>{this.props.delete(this.props.id)}}/>

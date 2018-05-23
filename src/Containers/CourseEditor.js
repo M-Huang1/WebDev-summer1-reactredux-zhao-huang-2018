@@ -47,7 +47,7 @@ export default class CourseEditor extends React.Component {
     render() {
         return (
             <Router>
-            <div className="container-fluid" style={{backgroundColor:'#DDDDDD', height:'100vh'}}>
+            <div className="container-fluid" style={{backgroundColor:'#DDDDDD'}}>
                 <h1>{this.state.course.title}</h1>
                 <h5> <a href="/CourseManager"> Back to Course Page </a></h5>
                 <div className="row moduleRow">

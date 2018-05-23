@@ -15,6 +15,10 @@ nav:hover{
     color: black;
 }
 
+
+.active{
+    background-color: grey !important;
+}
 * {
     font-family: 'Quicksand', sans-serif;
 }
@@ -23,9 +27,7 @@ nav:hover{
     border-top: 2px solid black;
     height: 100vh;
 }
-.selected{
-    border: 1px solid red;
-}
+
 html, body{
     height: 100%;
     overflow: auto;

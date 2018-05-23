@@ -3,6 +3,8 @@ import Course from "../Components/Course";
 import "../Style.css"
 import CourseService from "../Services/CourseService";
 import ModuleList from "./ModuleList";
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css'
 
 export default class CourseManager
     extends React.Component {
@@ -42,9 +44,9 @@ export default class CourseManager
             courses = this.state.courses.map(
                 function (course) {
                     return <Course key={course.id}
-                                      course={course}
-                                      delete={self.deleteCourse}
-                                        module={self.routeToModule}/>
+                                   course={course}
+                                   delete={self.deleteCourse}
+                                   module={self.routeToModule}/>
                 }
             )
         }
@@ -63,14 +65,26 @@ export default class CourseManager
     }
 
     deleteCourse(id) {
-        this.courseService
-            .deleteCourse(id)
-            .then(() => {
-                    this.findAllCourses();
-                }
-            )
+        confirmAlert({
+            customUI: ({ onClose }) => {
+                return (
+                    <div className='custom-ui'>
+                        <h1>Are you sure you want to delete this course? </h1>
+                        <button className='btn' onClick={onClose}>No</button>
 
-    }
+                        <button className='btn' onClick={() => {
+                            this.courseService
+                            .deleteCourse(id)
+                            .then(() => {
+                                    this.findAllCourses();
+                                    onClose();
+                                });
+                        }}>Yes</button>
+                    </div>
+                )
+            }
+        });
+            }
 
     routeToModule(id){
         return ModuleList;

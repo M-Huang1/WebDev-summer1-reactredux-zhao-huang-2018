@@ -4,6 +4,7 @@ import ModuleService from '../Services/ModuleService';
 import CourseService from '../Services/CourseService';
 import LessonService from '../Services/LessonService.js';
 import Lesson from '../Components/Lesson';
+import {confirmAlert} from "react-confirm-alert";
 export default class LessonList
     extends React.Component {
 
@@ -87,14 +88,30 @@ export default class LessonList
     }
 
     deleteLesson(id) {
-        this.lessonService
-            .deleteLesson(id)
-            .then(() => {
-                    this.findAllLessonsByModule();
-                }
-            )
+        confirmAlert({
+            customUI: ({ onClose }) => {
+                return (
+                    <div className='custom-ui'>
+                        <h1>Are you sure you want to delete this lesson? </h1>
+                        <button className='btn' onClick={onClose}>No</button>
+
+                        <button className='btn' onClick={() => {
+                            this.lessonService
+                            .deleteLesson(id)
+                            .then(() => {
+                                    this.findAllLessonsByModule();
+                                    onClose();
+                                }
+                            )
+                        }}>Yes</button>
+                    </div>
+                )
+            }
+        });
 
     }
+
+
 
     activeTab(id){
         this.setState({activeTab:id});
@@ -128,14 +145,19 @@ export default class LessonList
     render() { return(
         <div>
             <h2>Lessons for {this.state.module.title}</h2>
-            <input className="form-control"
-                   onChange={this.titleChanged}
-                   value={this.state.lesson.title}
-                   placeholder="Lesson Title"
-            />
-            <button onClick={this.createLesson} className="btn btn-primary">
-                Add Lesson
-            </button>
+            <div className="row">
+                <div className='col-6'>
+                    <input className="form-control"
+                       onChange={this.titleChanged}
+                       value={this.state.lesson.title}
+                       placeholder="Lesson Title"/>
+                </div>
+                <div className='col-2' >
+                    <button onClick={this.createLesson} className="btn btn-primary" style={{margin:'0px'}}>
+                        Add Lesson
+                    </button>
+                </div>
+            </div>
         <ul className="nav nav-tabs">
             {this.renderListOfLessons()}
         </ul>

@@ -2,6 +2,7 @@ import React from 'react';
 import Module from '../Components/Module.js';
 import ModuleService from "../Services/ModuleService";
 import CourseService from "../Services/CourseService";
+import {confirmAlert} from "react-confirm-alert";
 export default class ModuleList
     extends React.Component {
     constructor(props) {
@@ -14,11 +15,15 @@ export default class ModuleList
         this.findAllModulesByCourse = this.findAllModulesByCourse.bind(this);
         this.findCourse = this.findCourse.bind(this);
         this.deleteModule = this.deleteModule.bind(this);
+        this.activeModule = this.activeModule.bind(this);
         this.state = {
             courseId: this.props.courseId,
             course: null,
-            module: { title: '' },
-            modules: []};}
+            module: {title: ''},
+            modules: [],
+            activeModule: null
+        };
+    }
 
 
     componentDidMount() {
@@ -52,13 +57,33 @@ export default class ModuleList
     }
 
     deleteModule(id) {
-        this.moduleService
-            .deleteModule(id)
-            .then(() => {
-                    this.findAllModulesByCourse();
-                }
-            )
 
+        confirmAlert({
+            customUI: ({ onClose }) => {
+                return (
+                    <div className='custom-ui'>
+                        <h1>Are you sure you want to delete this module? </h1>
+                        <button className='btn' onClick={onClose}>No</button>
+
+                        <button className='btn' onClick={() => {
+                            this.moduleService
+                                .deleteModule(id)
+                                .then(() => {
+                                        this.findAllModulesByCourse();
+                                        onClose();
+                                    });
+                        }}>Yes</button>
+                    </div>
+                )
+            }
+        });
+
+
+    }
+
+    activeModule(id){
+        console.log('this happened');
+        this.setState({activeModule:id});
     }
 
     renderListOfModules() {
@@ -73,7 +98,9 @@ export default class ModuleList
                             delete={self.deleteModule}
                             id={module.id}
                             key={module.id}
-                            courseId = {self.state.courseId}/>
+                            courseId = {self.state.courseId}
+                            makeActiveModule ={self.activeModule}
+                            activeModule={self.state.activeModule}/>
                     });
             }
         }
