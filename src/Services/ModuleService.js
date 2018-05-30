@@ -1,8 +1,8 @@
 let _singleton = Symbol();
 
-const ADDRESS = 'https://webdev-zhao-huang-summer2018.herokuapp.com';
+const ADDRESS = 'http://localhost:8080';
 const MODULE_API_URL =
-    'https://webdev-zhao-huang-summer2018.herokuapp.com/api/module';
+    'http://localhost:8080/api/module';
 
 class ModuleService {
     constructor(singletonToken) {

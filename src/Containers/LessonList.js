@@ -5,12 +5,16 @@ import CourseService from '../Services/CourseService';
 import LessonService from '../Services/LessonService.js';
 import Lesson from '../Components/Lesson';
 import {confirmAlert} from "react-confirm-alert";
-import WidgetList from "./WidgetList";
+import App from "./WidgetList";
+import {createStore} from 'redux';
+import {widgetReducer} from "../reducers/widgetReducer";
+import {Provider, connect} from 'react-redux'
 export default class LessonList
     extends React.Component {
 
     constructor(props){
         super(props);
+        this.store = createStore(widgetReducer);
         this.courseService = CourseService.instance;
         this.moduleService = ModuleService.instance;
         this.lessonService = LessonService.instance;
@@ -147,12 +151,14 @@ export default class LessonList
     renderListOfWidgets(){
         let self = this;
         if (this.state.activeTab != null){
+
             return(
-                <WidgetList
-                    lessonId={self.state.activeTab}
-                    moduleId={self.state.moduleId}
-                    courseId={self.state.courseId}
-                />
+                <Provider store={self.store}>
+                    <App
+                        lessonId={self.state.activeTab}
+                        moduleId={self.state.moduleId}
+                        courseId={self.state.courseId}/>
+                </Provider>
             )
         }
         else{

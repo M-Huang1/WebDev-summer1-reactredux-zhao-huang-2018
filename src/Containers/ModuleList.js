@@ -82,7 +82,6 @@ export default class ModuleList
     }
 
     activeModule(id){
-        console.log('this happened');
         this.setState({activeModule:id});
     }
 

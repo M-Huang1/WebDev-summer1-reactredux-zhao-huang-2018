@@ -1,8 +1,8 @@
 let _singleton = Symbol();
 
-const ADDRESS = 'https://webdev-zhao-huang-summer2018.herokuapp.com';
+const ADDRESS = 'http://localhost:8080';
 const WIDGET_API_URL =
-    'https://webdev-zhao-huang-summer2018.herokuapp.com/api/widget';
+    'http://localhost:8080/api/widget';
 
 class WidgetsService {
     constructor(singletonToken) {
@@ -22,9 +22,9 @@ class WidgetsService {
             });
     }
 
-    saveAllWidget(){
+    saveAllWidget(widgets){
         return fetch(WIDGET_API_URL + '/save', {
-            body: JSON.stringify(widget),
+            body: JSON.stringify(widgets),
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -72,4 +72,4 @@ class WidgetsService {
     }
 
 }
-export default WidgetService;
+export default WidgetsService;

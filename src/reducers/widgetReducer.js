@@ -8,19 +8,28 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
             return state;
 
         case constants.ADD_WIDGET:
+            let index = 0;
+            if (state.widgets.length > 0){
+                index = state.widgets.get(state.widgets.length - 1).order + 1;
+            }
+            else{
+                index = 0;
+            }
             return {
                 widgets: [
                     ...state.widgets,
                     {
-                        id: state.widgets.length + 1,
+                        lesson: action.lesson,
                         text: 'New Widget',
-                        order: state.widgets.length + 1,
+                        order: index + 1,
                         width: '200',
                         height: '200',
                         style: 'default',
-                        className:'heading',
-                        name: 'Widget' + state.widgets.length + 1,
-                        size:1
+                        className: 'heading',
+                        name: 'New Widget',
+                        size: 1,
+                        listType: 'ordered'
+
                     }
                 ]
             };
