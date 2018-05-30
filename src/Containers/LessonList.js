@@ -5,6 +5,7 @@ import CourseService from '../Services/CourseService';
 import LessonService from '../Services/LessonService.js';
 import Lesson from '../Components/Lesson';
 import {confirmAlert} from "react-confirm-alert";
+import WidgetList from "./WidgetList";
 export default class LessonList
     extends React.Component {
 
@@ -142,6 +143,22 @@ export default class LessonList
         }
         return (lessons)
     }
+
+    renderListOfWidgets(){
+        let self = this;
+        if (this.state.activeTab != null){
+            return(
+                <WidgetList
+                    lessonId={self.state.activeTab}
+                    moduleId={self.state.moduleId}
+                    courseId={self.state.courseId}
+                />
+            )
+        }
+        else{
+            return null;
+        }
+    }
     render() { return(
         <div>
             <h2>Lessons for {this.state.module.title}</h2>
@@ -161,5 +178,6 @@ export default class LessonList
         <ul className="nav nav-tabs">
             {this.renderListOfLessons()}
         </ul>
+            {this.renderListOfWidgets()}
         </div>
     );}}

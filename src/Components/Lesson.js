@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import WidgetList from '../Containers/WidgetList'
 import {BrowserRouter as Router, Link, Route}
     from 'react-router-dom';
 
@@ -28,6 +29,8 @@ export default class Lesson extends React.Component
                    X</button>
 
             </div>
+
+
         </li>
     )
     }
