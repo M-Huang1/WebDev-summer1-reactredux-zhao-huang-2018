@@ -18,6 +18,50 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
     let nextState
 
     switch(action.type){
+        case constants.NAME_CHANGED:
+            return{
+                widgets: state.widgets.map(widget => {
+                    if(widget.widgetOrder === action.widgetOrder) {
+                        widget.name = action.name;
+                    }
+
+                    return Object.assign({}, widget)
+                }),
+                preview: state.preview
+            };
+        case constants.WIDTH_CHANGED:
+            return{
+                widgets: state.widgets.map(widget => {
+                    if(widget.widgetOrder === action.widgetOrder) {
+                        widget.width = action.width;
+                    }
+
+                    return Object.assign({}, widget)
+                }),
+                preview: state.preview
+            };
+        case constants.HEIGHT_CHANGED:
+            return{
+                widgets: state.widgets.map(widget => {
+                    if(widget.widgetOrder === action.widgetOrder) {
+                        widget.height = action.height;
+                    }
+
+                    return Object.assign({}, widget)
+                }),
+                preview: state.preview
+            };
+        case constants.SRC_CHANGED:
+            return{
+                widgets: state.widgets.map(widget => {
+                    if(widget.widgetOrder === action.widgetOrder) {
+                        widget.src = action.src;
+                    }
+
+                    return Object.assign({}, widget)
+                }),
+                preview: state.preview
+            };
         case constants.HREF_CHANGED:
             return{
                 widgets: state.widgets.map(widget => {

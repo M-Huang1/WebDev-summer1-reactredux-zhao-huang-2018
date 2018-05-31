@@ -72,4 +72,34 @@ export const hrefChanged=(dispatch, widgetOrder, href) =>(
         widgetOrder: widgetOrder,
         href: href
     })
-)
+);
+export const srcChanged=(dispatch, widgetOrder, src) =>(
+    dispatch({
+        type: constants.SRC_CHANGED,
+        widgetOrder: widgetOrder,
+        src: src
+    })
+);
+export const widthChanged=(dispatch, widgetOrder, width) =>(
+    dispatch({
+        type: constants.WIDTH_CHANGED,
+        widgetOrder: widgetOrder,
+        width: width
+    })
+);
+export const heightChanged=(dispatch, widgetOrder, height) =>(
+    dispatch({
+        type: constants.HEIGHT_CHANGED,
+        widgetOrder: widgetOrder,
+        height: height
+    })
+);
+
+export const nameChanged=(dispatch, widgetOrder,name) =>(
+    dispatch({
+        type: constants.NAME_CHANGED,
+        widgetOrder: widgetOrder,
+        name: name
+    })
+);
+

@@ -10,3 +10,7 @@ export const MOVE_UP = 'MOVE_UP';
 export const MOVE_DOWN = 'MOVE_DOWN';
 export const LIST_TYPE_CHANGED = 'LIST_TYPE_CHANGED';
 export const HREF_CHANGED = 'HREF_CHANGED';
+export const SRC_CHANGED ='SRC_CHANGED';
+export const HEIGHT_CHANGED = 'HEIGHT_CHANGED';
+export const WIDTH_CHANGED = 'WIDTH_CHANGED';
+export const NAME_CHANGED = 'NAME_CHANGED';

@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 
-const Heading = ({widget, preview, textChanged, headingSizeChanged}) => {
+const Heading = ({widget, preview, textChanged, headingSizeChanged,nameChanged}) => {
     let selectElem
     let inputElem
+    let nameElem
     return(
         <div>
             <div hidden={preview}>
@@ -18,6 +19,10 @@ const Heading = ({widget, preview, textChanged, headingSizeChanged}) => {
                     <option value="3">Heading 3</option>
                 </select>
                 </div>
+                <div>
+                    <input value={widget.name} placeholder='Widget Name' onChange={() => nameChanged(widget.widgetOrder, nameElem.value)}
+                           ref={node => nameElem = node}/>
+                </div>
                 <h3>Preview</h3>
             </div>
             {widget.size === 1 && <h1>{widget.text}</h1>}
@@ -27,14 +32,19 @@ const Heading = ({widget, preview, textChanged, headingSizeChanged}) => {
     )
 };
 
-const Paragraph = ({widget, preview, textChanged}) => {
+const Paragraph = ({widget, preview, textChanged,nameChanged}) => {
     let selectElem
     let inputElem
+    let nameElem
     return(
         <div>
             <div hidden={preview}>
                 <textarea value={widget.text} onChange={() => textChanged(widget.widgetOrder, inputElem.value)}
                        ref={node => inputElem = node}/>
+                <div>
+                    <input value={widget.name} placeholder='Widget Name' onChange={() => nameChanged(widget.widgetOrder, nameElem.value)}
+                           ref={node => nameElem = node}/>
+                </div>
                 <h3>Preview</h3>
             </div>
             {widget.text}
@@ -67,9 +77,10 @@ function renderList(listType, text){
             </ul>);
     }
 }
-const List = ({widget, preview, textChanged, listTypeChanged}) => {
+const List = ({widget, preview, textChanged, listTypeChanged,nameChanged}) => {
     let selectElem
     let inputElem
+    let nameElem
     return(
         <div>
             <div hidden={preview}>
@@ -83,6 +94,10 @@ const List = ({widget, preview, textChanged, listTypeChanged}) => {
                         <option value='unordered'>Unordered</option>
                     </select>
                 </div>
+                <div>
+                    <input value={widget.name} placeholder='Widget Name' onChange={() => nameChanged(widget.widgetOrder, nameElem.value)}
+                           ref={node => nameElem = node}/>
+                </div>
                 <h3>Preview</h3>
             </div>
             {renderList(widget.listType, widget.text)}
@@ -90,9 +105,10 @@ const List = ({widget, preview, textChanged, listTypeChanged}) => {
     )
 };
 
-const Link = ({widget, preview, textChanged, hrefChanged}) => {
+const Link = ({widget, preview, textChanged, hrefChanged,nameChanged}) => {
     let selectElem
     let inputElem
+    let nameElem
     return(
         <div>
             <div hidden={preview}>
@@ -102,9 +118,42 @@ const Link = ({widget, preview, textChanged, hrefChanged}) => {
                     <input placeholder='Href Value' value={widget.href} onChange={() => hrefChanged(widget.widgetOrder, selectElem.value)}
                            ref={node => selectElem = node}/>
                 </div>
+                <div>
+                    <input value={widget.name} placeholder='Widget Name' onChange={() => nameChanged(widget.widgetOrder, nameElem.value)}
+                           ref={node => nameElem = node}/>
+                </div>
                 <h3>Preview</h3>
             </div>
             <a href={widget.href} target="_blank"> {widget.text} </a>
+        </div>
+    )
+};
+
+const Image = ({widget, preview, srcChanged, widthChanged, heightChanged,nameChanged}) => {
+    let inputElem
+    let widthElem
+    let heightElem
+    let nameElem
+    return(
+        <div>
+            <div hidden={preview}>
+                <input value={widget.src} placeholder='Image Source' onChange={() => srcChanged(widget.widgetOrder, inputElem.value)}
+                       ref={node => inputElem = node}/>
+                <div>
+                    <input value={widget.height} placeholder='Image Height' onChange={() => heightChanged(widget.widgetOrder, heightElem.value)}
+                           ref={node => heightElem = node}/>
+                </div>
+                <div>
+                    <input value={widget.width} placeholder='Image Width' onChange={() => widthChanged(widget.widgetOrder, widthElem.value)}
+                           ref={node => widthElem = node}/>
+                </div>
+                <div>
+                    <input value={widget.name} placeholder='Widget Name' onChange={() => nameChanged(widget.widgetOrder, nameElem.value)}
+                           ref={node => nameElem = node}/>
+                </div>
+                <h3>Preview</h3>
+            </div>
+            <img src={widget.src} width={widget.width} height={widget.height}  alt="Picture Link"/>
         </div>
     )
 };
@@ -148,17 +197,27 @@ export default class Widget
                     {this.props.widget.className ==='heading' && <Heading widget={this.props.widget}
                                                                           preview ={this.props.preview}
                                                                           textChanged = {this.props.textChanged}
+                                                                          nameChanged={this.props.nameChanged}
                                                                           headingSizeChanged = {this.props.headingSizeChanged}/>}
                     {this.props.widget.className ==='paragraph' && <Paragraph widget={this.props.widget}
                                                                                 textChanged = {this.props.textChanged}
-                                                                              preview ={this.props.preview}/>}
+                                                                                nameChanged={this.props.nameChanged}
+                                                                                preview ={this.props.preview}/>}
                     {this.props.widget.className ==='list' && <List widget={this.props.widget}
                                                                               textChanged = {this.props.textChanged}
                                                                                 listTypeChanged={this.props.listTypeChanged}
-                                                                              preview ={this.props.preview}/>}
+                                                                                nameChanged={this.props.nameChanged}
+                                                                                preview ={this.props.preview}/>}
                     {this.props.widget.className ==='link' && <Link widget={this.props.widget}
                                                                     textChanged = {this.props.textChanged}
                                                                     hrefChanged={this.props.hrefChanged}
+                                                                    nameChanged={this.props.nameChanged}
+                                                                    preview ={this.props.preview}/>}
+                    {this.props.widget.className ==='image' && <Image widget={this.props.widget}
+                                                                    srcChanged = {this.props.srcChanged}
+                                                                      nameChanged={this.props.nameChanged}
+                                                                      heightChanged={this.props.heightChanged}
+                                                                      widthChanged={this.props.widthChanged}
                                                                     preview ={this.props.preview}/>}
 
                     </div>
