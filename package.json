@@ -6,6 +6,7 @@
     "bootstrap": "^4.1.1",
     "font-awesome": "^4.7.0",
     "react": "^16.3.2",
+    "react-bootstrap-toggle": "^2.3.1",
     "react-confirm-alert": "^2.0.2",
     "react-dom": "^16.3.2",
     "react-redux": "^5.0.7",

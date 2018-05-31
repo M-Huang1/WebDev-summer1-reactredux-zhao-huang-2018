@@ -150,8 +150,8 @@ export default class LessonList
 
     renderListOfWidgets(){
         let self = this;
-        if (this.state.activeTab != null){
 
+        if (this.state.activeTab != null){
             return(
                 <Provider store={self.store}>
                     <App
@@ -184,6 +184,8 @@ export default class LessonList
         <ul className="nav nav-tabs">
             {this.renderListOfLessons()}
         </ul>
+        <div>
             {this.renderListOfWidgets()}
+        </div>
         </div>
     );}}

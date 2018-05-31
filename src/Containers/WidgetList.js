@@ -3,70 +3,64 @@ import Widget from '../Components/Widget'
 import {connect} from 'react-redux'
 import * as actions from "../actions"
 import LessonService from '../Services/LessonService';
+import Toggle from 'react-bootstrap-toggle';
 class WidgetList
     extends React.Component {
 
     constructor(props) {
         super(props);
+
         this.lessonService = LessonService.instance;
-        this.renderListOfWidgets = this.renderListOfWidgets.bind(this);
-        this.state = {
-            widgets:[]
-        }
+        this.props.findAllWidgetsForLesson(this.props.courseId,this.props.moduleId,this.props.lessonId);
 
     }
+
+
     componentDidMount() {
-        console.log(this.props.lessonId);
         this.lessonService.findLessonById(this.props.lessonId).then(
             (lesson) =>
             {this.setState({lesson: lesson}
                 )
             }
         );
+    }
 
-        this.props.findAllWidgetsForLesson(this.props.courseId,this.props.moduleId,this.props.lessonId);
+    componentDidUpdate(prevProps){
+        console.log('Happening');
+       if(this.props.lessonId !== prevProps.lessonId ){
+           this.props.findAllWidgetsForLesson(this.props.courseId,this.props.moduleId,this.props.lessonId);
+       }
 
     }
-    componentWillReceiveProps(nextProps){
-        console.log(nextProps.lessonId);
-        this.lessonService.findLessonById(nextProps.lessonId).then(
-            (lesson) =>
-            {this.setState({lesson: lesson}
-            )
-            }
-        );
 
-        this.props.findAllWidgetsForLesson(nextProps.courseId,nextProps.moduleId,nextProps.lessonId);
-    }
-    renderListOfWidgets() {
-        let self = this;
-        let widgets = null;
-
-        if (this.state) {
-            let active = '';
-            if (this.state.widgets.length > 0) {
-                widgets = this.state.widgets.map(
-                    function (widget) {
-                        return <Widget
-                            widget={widget}
-                            id={widget.id}
-                        />
-                    });
-            }
-        }
-        return (widgets)
-    }
 
     render() {
         return (
             <div className="container" style={{backgroundColor: 'white'}}>
                 <div>
                     <h3 style={{display: 'inline-block'}}>Lesson Widgets</h3>
-                    <button onClick={() => {this.props.addWidget(this.state.lesson)}} className="btn-sm btn-danger" style={{float: 'right', margin: '0px'}}><i
+
+                    <button onClick={() => {this.props.save(this.props.lessonId)}} className="btn-sm btn-success" style={{float: 'right', margin: '0px'}}>
+                        Save</button>
+                    <button onClick={() => {this.props.addWidget(this.state.lesson)}} className="btn-sm btn-primary" style={{float: 'right', margin: '0px 5px'}}><i
                         className="fa fa-plus"/></button>
+                    <div className="checkbox">
+                        <label><input onChange={()=> {this.props.previewChange()}} type="checkbox" value=""/>Preview</label>
+                    </div>
                 </div>
                 <div className="panel-group">
-                    {this.renderListOfWidgets()}
+                    {this.props.widgets.map(widget => (
+                        <Widget widget={widget}
+                                totalLength = {this.props.widgets.length}
+                                preview={this.props.previewMode}
+                                selectWidgetType={this.props.selectWidgetType}
+                                deleteWidget ={this.props.deleteWidget}
+                                widgetUp={this.props.widgetUp}
+                                widgetDown={this.props.widgetDown}
+                                key={widget.id}/>
+                        )
+                        )
+                    }
                 </div>
 
             </div>
@@ -74,7 +68,7 @@ class WidgetList
     }
 }
 
-const stateToPropertiesMapper = (state) => ({
+const stateToPropertiesMapper = state => ({
     widgets: state.widgets,
     previewMode: state.preview
 });
@@ -84,7 +78,16 @@ const dispatcherToPropsMapper
     findAllWidgetsForLesson: (courseId,moduleId, lessonId,) => actions.findAllWidgetsForLesson(dispatch,
         courseId,moduleId,lessonId),
     addWidget: (lesson) => actions.addWidget(dispatch, lesson),
-    save: () => actions.save(dispatch)
+    save: (lessonId) => actions.save(dispatch, lessonId),
+    previewChange: ()=> actions.preview(dispatch),
+    selectWidgetType: (widgetOrder, widgetType)=>
+        actions.selectWidgetType(dispatch, widgetOrder, widgetType),
+    deleteWidget: (widgetOrder) =>
+        actions.deleteWidget(dispatch, widgetOrder),
+    widgetUp: (widgetOrder) =>
+        actions.widgetUp(dispatch, widgetOrder),
+    widgetDown: (widgetOrder) =>
+        actions.widgetDown(dispatch, widgetOrder)
 });
 const App = connect(
     stateToPropertiesMapper,

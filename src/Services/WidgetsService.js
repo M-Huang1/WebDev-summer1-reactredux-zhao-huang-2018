@@ -22,8 +22,8 @@ class WidgetsService {
             });
     }
 
-    saveAllWidget(widgets){
-        return fetch(WIDGET_API_URL + '/save', {
+    saveAllWidget(widgets, lessonId){
+        return fetch(WIDGET_API_URL + '/lesson/' + lessonId + '/save', {
             body: JSON.stringify(widgets),
             headers: {
                 'Content-Type': 'application/json'
