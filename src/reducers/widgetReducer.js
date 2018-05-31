@@ -16,12 +16,59 @@ function fixWidgetsOrder(widgets){
 }
 export const widgetReducer = (state = {widgets: [], preview: false}, action) => {
     let nextState
+
     switch(action.type){
+        case constants.HREF_CHANGED:
+            return{
+                widgets: state.widgets.map(widget => {
+                    if(widget.widgetOrder === action.widgetOrder) {
+                        widget.href = action.href;
+                    }
+
+                    return Object.assign({}, widget)
+                }),
+                preview: state.preview
+            };
+        case constants.LIST_TYPE_CHANGED:
+            return{
+                widgets: state.widgets.map(widget => {
+                    if(widget.widgetOrder === action.widgetOrder) {
+                        widget.listType = action.listType
+
+                    }
+                    return Object.assign({}, widget)
+                }),
+                preview: state.preview
+            };
+        case constants.HEADING_SIZE_CHANGED:
+            return{
+                widgets: state.widgets.map(widget => {
+                    if(widget.widgetOrder === action.widgetOrder) {
+                        widget.size = action.size
+
+                    }
+                    return Object.assign({}, widget)
+                }),
+                preview: state.preview
+            };
+        case constants.TEXT_CHANGED:
+                return{
+                    widgets: state.widgets.map(widget => {
+                        if(widget.widgetOrder === action.widgetOrder) {
+                            widget.text = action.text;
+                        }
+
+                        return Object.assign({}, widget)
+                    }),
+                    preview: state.preview
+                };
+
+
         case constants.MOVE_UP:
             let indexMU = action.widgetOrder;
             let upper
             let lower
-            let widgetMU = state.widgets
+            let widgetMU = state.widgets;
             widgetMU.forEach((widget) =>
             {
                 if (widget.widgetOrder === indexMU - 1) {
@@ -99,7 +146,9 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                 className: 'heading',
                 name: 'New Widget',
                 size: 1,
-                listType: 'ordered'
+                listType: 'ordered',
+                listItems: '',
+                href:''
 
             }];
             widgets = fixWidgetsOrder(widgets);
@@ -112,7 +161,7 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
             widgetService.saveAllWidget(state.widgets,action.lessonId).then(() =>{
                 return state;
             }, (error) => {return state;});
-
+            return state;
         case constants.PREVIEW:
             return {
                 widgets: state.widgets,

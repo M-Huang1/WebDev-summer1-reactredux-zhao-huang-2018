@@ -44,3 +44,32 @@ export const widgetDown = (dispatch,widgetOrder) => (
     dispatch({type: constants.MOVE_DOWN,
         widgetOrder: widgetOrder})
 );
+
+export const textChanged = (dispatch, widgetOrder, newText) => (
+    dispatch({
+        type: constants.TEXT_CHANGED,
+        widgetOrder: widgetOrder,
+        text: newText})
+);
+
+export const headingSizeChanged = (dispatch, widgetOrder, newSize) => (
+    dispatch({
+        type: constants.HEADING_SIZE_CHANGED,
+        widgetOrder: widgetOrder,
+        size: newSize})
+);
+
+export const listTypeChanged = (dispatch, widgetOrder, newType) => (
+    dispatch({
+        type: constants.LIST_TYPE_CHANGED,
+        widgetOrder: widgetOrder,
+        listType: newType})
+);
+
+export const hrefChanged=(dispatch, widgetOrder, href) =>(
+    dispatch({
+        type: constants.HREF_CHANGED,
+        widgetOrder: widgetOrder,
+        href: href
+    })
+)

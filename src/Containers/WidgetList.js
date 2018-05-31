@@ -57,6 +57,10 @@ class WidgetList
                                 deleteWidget ={this.props.deleteWidget}
                                 widgetUp={this.props.widgetUp}
                                 widgetDown={this.props.widgetDown}
+                                textChanged={this.props.textChanged}
+                                headingSizeChanged={this.props.headingSizeChanged}
+                                listTypeChanged={this.props.listTypeChanged}
+                                hrefChanged={this.props.hrefChanged}
                                 key={widget.id}/>
                         )
                         )
@@ -87,7 +91,15 @@ const dispatcherToPropsMapper
     widgetUp: (widgetOrder) =>
         actions.widgetUp(dispatch, widgetOrder),
     widgetDown: (widgetOrder) =>
-        actions.widgetDown(dispatch, widgetOrder)
+        actions.widgetDown(dispatch, widgetOrder),
+    textChanged: (widgetOrder, text) =>
+        actions.textChanged(dispatch,widgetOrder,text),
+    headingSizeChanged:(widgetOrder, size) =>
+        actions.headingSizeChanged(dispatch, widgetOrder, size),
+    listTypeChanged: (widgetOrder,listType) =>
+        actions.listTypeChanged(dispatch,widgetOrder,listType),
+    hrefChanged: (widgetOrder, href) =>
+        actions.hrefChanged(dispatch,widgetOrder,href)
 });
 const App = connect(
     stateToPropertiesMapper,
